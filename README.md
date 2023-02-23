@@ -11,10 +11,10 @@
 ---
 
 ## Summary
-It was predicted the outcome of the marketing campaign using the the gradient boosting model. It was identified 15 most significant featurs, affecting the campaign outcome - open the deposit. The customer may get a forecast of contact while marketing campaign by a given data using a [microservice application](https://alex1iv-marketing-campaign-application-n8fexu.streamlit.app/) on a web server.
+It was predicted the outcome of the marketing campaign using the the gradient boosting model. It was identified 15 most significant featurs, affecting the campaign outcome - open the deposit. The customer may get a forecast of contact while marketing campaign by a given data using the [application on a web server](https://alex1iv-marketing-campaign-application-n8fexu.streamlit.app/) .
 
 <p align="center"> 
-<img src="figures/mainpage.png" width="600" height="350"> 
+<img src="figures/fig_streamlit.png" width="700" height="350"> 
 </p>
 
 

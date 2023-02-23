@@ -11,10 +11,11 @@
 ---
 
 ## Summary
-It was predicted the outcome of the marketing campaign using the the gradient boosting model. It was identified 15 most significant featurs, affecting the campaign outcome - open the deposit. The customer may get a forecast of contact while marketing campaign by a given data using the [application on a web server](https://alex1iv-marketing-campaign-application-n8fexu.streamlit.app/) .
+It was predicted the outcome of the marketing campaign using the the gradient boosting model. It was identified 15 most significant featurs, affecting the campaign outcome - open the deposit. The customer may get a forecast of contact while marketing campaign by a given data using the [application on a web server](https://alex1iv-marketing-campaign-application-n8fexu.streamlit.app/). The sample page shown below.
 
-<div align="center"> <img src="./figures/fig_streamlit.png" width="650" height="350">  </div>
 
+<div align="center"> <img src="/figures/fig_streamlit.png" width="650" height="350">  </div>
+<p align="center"> Microservice application page</p>
 
 ## Project description
 A bank initiated an one-year marketing campaign among its clients to deposit money. After it was finished, the management decided to identfy success factors of the campaign using machine learning algorythm to increase its efficiency and decrease costs.

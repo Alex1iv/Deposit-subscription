@@ -1,12 +1,16 @@
 import pandas as pd 
 import streamlit as st
-from utils.reader_config import config_reader 
+ 
 import pickle
-import os
+import os, sys
 from datetime import date
 
+sys.path.insert(1, "./config/")
+
+from utils.reader_config import config_reader
 # Import of parameters
 config = config_reader('config/config.json')
+
 
 # loading saved model
 with open(os.path.join(config.model_path, 'model_rf_opt.pkl'), 'rb') as f:

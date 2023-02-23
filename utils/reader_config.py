@@ -1,4 +1,5 @@
 import json
+import dotmap
 from dotmap import DotMap
 
 def config_reader(path_to_json_conf: str) -> dict:

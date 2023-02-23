@@ -4,7 +4,7 @@ from utils.reader_config import config_reader
 import pickle
 import os
 from datetime import date
-from dotmap import DotMap
+
 # Import of parameters
 config = config_reader('config/config.json')
 

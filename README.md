@@ -35,7 +35,8 @@ Most significant featurs are: 'poutcome_success', 'balance', 'pdays', and 13 oth
 The model shows good predictive capability.
 
 <p align="center"> 
-<img src="/figures/fig_14.PNG" width="350" height="350"> <br>ROC curve </p>
+<img src="/figures/fig_14.png" width="350" height="350"> </p>
+<p align="center"> ROC curve </p>
 
 ## Project structure
 

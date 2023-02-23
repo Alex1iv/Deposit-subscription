@@ -75,8 +75,8 @@ data = {
     'default': Default,
     'balance': Balance,
     'housing': Housing,
-    'duration':224, # убрать
-    #'Loan': 'no',
+    #'duration':224, # убрать
+    'Loan': 'no',
     'contact':Contact,
     'month': month,
     'day': day,
@@ -87,41 +87,41 @@ data = {
 }
 
 
-data_yes = {'age': {1: 56},
- 'job': {1: 'management'},
- 'marital': {1: 'married'},
- 'education': {1: 'tertiary'},
- 'default': {1: 'no'},
- 'balance': {1: 830.0},
- 'housing': {1: 'yes'},
- 'loan': {1: 'yes'},
- 'contact': {1: 'unknown'},
- 'day': {1: 6},
- 'month': {1: 'may'},
- 'duration': {1: 1201},
- 'campaign': {1: 1},
- 'pdays': {1: -1},
- 'previous': {1: 0},
- 'poutcome': {1: 'unknown'},
- 'deposit': {1: 'yes'}}
+data_yes = {'age': {1: 55},
+    'job': {1: '	services'},
+    'marital': {1: 'married'},
+    'education': {1: 'secondary'},
+    'default': {1: 'no'},
+    'balance': {1: 2476.0},
+    'housing': {1: 'yes'},
+    'loan': {1: 'no'},
+    'contact': {1: 'unknown'},
+    'day': {1: 5},
+    'month': {1: 'may'},
+    #'duration': {1: 1201},
+    'campaign': {1: 1},
+    'pdays': {1: -1},
+    'previous': {1: 0},
+    'poutcome': {1: 'unknown'},
+ }
 
 data_no = {'age': {6001: 26},
- 'job': {6001: 'technician'},
- 'marital': {6001: 'married'},
- 'education': {6001: 'tertiary'},
- 'default': {6001: 'no'},
- 'balance': {6001: 8.0},
- 'housing': {6001: 'yes'},
- 'loan': {6001: 'yes'},
- 'contact': {6001: 'unknown'},
- 'day': {6001: 13},
- 'month': {6001: 'may'},
- 'duration': {6001: 262},
- 'campaign': {6001: 2},
- 'pdays': {6001: -1},
- 'previous': {6001: 0},
- 'poutcome': {6001: 'unknown'},
- 'deposit': {6001: 'no'}}
+    'job': {6001: 'technician'},
+    'marital': {6001: 'married'},
+    'education': {6001: 'tertiary'},
+    'default': {6001: 'no'},
+    'balance': {6001: 8.0},
+    'housing': {6001: 'yes'},
+    'loan': {6001: 'yes'},
+    'contact': {6001: 'unknown'},
+    'day': {6001: 13},
+    'month': {6001: 'may'},
+    #'duration': {6001: 262},
+    'campaign': {6001: 2},
+    'pdays': {6001: -1},
+    'previous': {6001: 0},
+    'poutcome': {6001: 'unknown'},
+}
 
 #test_df = pd.DataFrame(data) #.items()
 
@@ -129,20 +129,19 @@ limits = pd.DataFrame({
     'age': [18, 95],
     'balance': [-2049.0, 4062.0],
     'day':[1.0	,31.0],
-    'duration':	[2.0, 3881.0],
+    #'duration':	[2.0, 3881.0],
     'campaign':	[1.0,43.0],
     'pdays'	:[-1.0, 854.0],
     'previous':[0, 58]}
 )
 
-
 if test_mode == 'Test_yes':
     test_df = pd.DataFrame(data_yes)
-    test_df['duration'] = (test_df['duration']-(limits['duration'].min()))/(limits['duration'].max()-(limits['duration'].min()))
+    #test_df['duration'] = (test_df['duration']-(limits['duration'].min()))/(limits['duration'].max()-(limits['duration'].min()))
     
 elif test_mode == 'Test_no':
     test_df = pd.DataFrame(data_no) #.items()
-    test_df['duration'] = (test_df['duration']-(limits['duration'].min()))/(limits['duration'].max()-(limits['duration'].min()))
+    #test_df['duration'] = (test_df['duration']-(limits['duration'].min()))/(limits['duration'].max()-(limits['duration'].min()))
 else:
     test_df = pd.DataFrame(data, index=[0]) #.items()
 
@@ -164,7 +163,9 @@ test_df['contact_unknown'] = test_df['contact'].apply(lambda x: 1 if x=='unknown
 for i in ['success', 'unknown']:
     test_df[f'poutcome_{i}'] = test_df['poutcome'].apply(lambda x: 1 if x==i else 0)
 
-test_df['housing'] = test_df['housing'].apply(lambda x: 1 if x=='yes' else 0)
+for i in ['housing', 'loan']:
+    test_df[i] = test_df[i].apply(lambda x: 1 if x=='yes' else 0)
+#test_df['housing'] = test_df['housing'].apply(lambda x: 1 if x=='yes' else 0)
 
 test_df['age_group_60+'] = test_df['age'].apply(lambda x: 1 if 60<=x<=95 else 0)
 #test_df = test_df.drop(labels=['age']) # for series
@@ -172,16 +173,13 @@ test_df['age_group_60+'] = test_df['age'].apply(lambda x: 1 if 60<=x<=95 else 0)
 test_df.drop(['age', 'job', 'marital','default', 'day', 'contact', 'month','poutcome'], axis=1, inplace=True) #'age_group','education', 'loan','deposit'
 
 # Set columns order 
-test_df = test_df[['balance', 'housing', 'duration', 'campaign', 'pdays', 'previous', 'contact_cellular', 'contact_unknown', 'month_mar', 'month_may', 'month_oct', 'month_sep', 'poutcome_success', 'poutcome_unknown', 'age_group_60+']]
-
+test_df = test_df[['balance', 'housing', 'loan', 'campaign', 'pdays', 'previous', 'contact_cellular', 'contact_unknown', 'month_mar', 'month_may', 'month_oct', 'month_sep', 'poutcome_success', 'poutcome_unknown', 'age_group_60+']] #'duration', 
 
 
 # Prediction of probabilities:
 predict_prob = model.predict_proba(test_df)
 predict_class = model.predict(test_df)
 
-
 #st.subheader('Suggestion:')
 res = 'Contact' if predict_class[0] == 1 else 'No'
 st.write('### Forecasted outcome:','👉', res)
-

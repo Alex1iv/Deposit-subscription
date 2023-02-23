@@ -14,7 +14,8 @@
 It was predicted the outcome of the marketing campaign using the the gradient boosting model. It was identified 15 most significant featurs, affecting the campaign outcome - open the deposit. The customer may get a forecast of contact while marketing campaign by a given data using the [application on a web server](https://alex1iv-marketing-campaign-application-n8fexu.streamlit.app/). The sample page shown below.
 
 
-![.](./figures/fig_streamlit.PNG)
+<div align="center">
+<img src="./figures/fig_streamlit.PNG" width="500"/></div>
 
 <p align="center"> Microservice application page</p>
 
@@ -27,8 +28,8 @@ A bank initiated an one-year marketing campaign among its clients to deposit mon
 It might be suggested to contact customers either in December or in summer, because the probability of success depends on month:
 
 <div align="center">
-<img src="./figures/fig_6.png" width="450" height="325"/> 
-<img src="./figures/fig_7.png" width="450" height="325">  </div>
+<img src="./figures/fig_6.png" width="425" height="325"/> 
+<img src="./figures/fig_7.png" width="425" height="325">  </div>
 
 
 &emsp; &emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;**Success probability by months** &emsp; &emsp;&emsp;&emsp;&emsp; &emsp; &emsp;&emsp;&emsp;&emsp; **Deposit outcome by age groups**

@@ -21,7 +21,7 @@ today = date.today().isoformat().split('-')
 yyyy , mm, dd = today
 
 st.write("""
-## Prediction of the marketing campaign result
+## Result prediction of the marketing campaign
 """)
 
 #st.markdown('**How to use this app**')

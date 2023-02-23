@@ -26,7 +26,7 @@ It might be suggested to contact customers either in December or in summer, beca
 <img src="/figures/fig_7.png" width="400" height="300">  </div>
 
 
-&emsp; &emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;**Success probability by months** &emsp; &emsp;&emsp;&emsp;&emsp; &emsp; &emsp;&emsp;&emsp;&emsp; **Deposit outcome by age groups**
+&emsp; &emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;**Success probability by months** &emsp; &emsp;&emsp;&emsp;&emsp; &emsp; &emsp;&emsp;&emsp;&emsp; **Deposit outcome by age groups**
 
 
 It was studied several models such as linear regression, random forest, decision tree, gradient boosting and stacking
@@ -35,7 +35,7 @@ Most significant featurs are: 'poutcome_success', 'balance', 'pdays', and 13 oth
 The model shows good predictive capability.
 
 <p align="center"> 
-<img src="./figures/fig_14.PNG" width="350" height="350"> <br>ROC curve </p>
+<img src="/figures/fig_14.PNG" width="350" height="350"> <br>ROC curve </p>
 
 ## Project structure
 

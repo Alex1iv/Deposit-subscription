@@ -27,8 +27,8 @@ A bank initiated an one-year marketing campaign among its clients to deposit mon
 It might be suggested to contact customers either in December or in summer, because the probability of success depends on month:
 
 <div align="center">
-<img src="/figures/fig_6.png" width="400" height="300"/> 
-<img src="/figures/fig_7.png" width="400" height="300">  </div>
+<img src="./figures/fig_6.png" width="450" height="325"/> 
+<img src="./figures/fig_7.png" width="450" height="325">  </div>
 
 
 &emsp; &emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;**Success probability by months** &emsp; &emsp;&emsp;&emsp;&emsp; &emsp; &emsp;&emsp;&emsp;&emsp; **Deposit outcome by age groups**
@@ -40,7 +40,7 @@ Most significant featurs are: 'poutcome_success', 'balance', 'pdays', and 13 oth
 The model shows good predictive capability.
 
 <p align="center"> 
-<img src="/figures/fig_14.png" width="350" height="350"> </p>
+<img src="./figures/fig_14.png" width="400" height="400"> </p>
 <p align="center"> ROC curve </p>
 
 ## Project structure

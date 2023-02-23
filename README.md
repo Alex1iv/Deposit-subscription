@@ -11,7 +11,7 @@
 ---
 
 ## Summary
-It was predicted the outcome of the marketing campaign using the the gradient boosting model. It was identified 15 most significant featurs, affecting the campaign outcome.
+It was predicted the outcome of the marketing campaign using the the gradient boosting model. It was identified 15 most significant featurs, affecting the campaign outcome - open the deposit.
 
 ## Project description
 A bank initiated an one-year marketing campaign among its clients to deposit money. After it was finished, the management decided to identfy success factors of the campaign using machine learning algorythm to increase its efficiency and decrease costs.
@@ -19,13 +19,23 @@ A bank initiated an one-year marketing campaign among its clients to deposit mon
 ## Data and methods
 :arrow_up:[ to content](README.md#Content)
 
+It might be suggested to contact customers either in December or in summer, because the month increase the probability of success:
+
+<div align="center">
+<img src="./figures/fig_6.PNG" width="400" height="300"/> 
+<img src="./figures/fig_7.PNG" width="400" height="300">  </div>
+
+
+&emsp; &emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;&emsp;&emsp;**Success probability by months** &emsp; &emsp;&emsp;&emsp;&emsp; &emsp; &emsp;&emsp;&emsp;&emsp; **Deposit outcome by age groups**
+
+
 It was studied several models such as linear regression, random forest, decision tree, gradient boosting and stacking
-Most significant featurs are: 'poutcome_success', 'balance', 'pdays', and 13 other.
+Most significant featurs are: 'poutcome_success', 'balance', 'pdays', and 13 others.
 
 The model shows good predictive capability.
 
 <p align="center"> 
-<img src="/logs_and_figures/fig_14.PNG" width="450" height="350"> </p>
+<img src="./figures/fig_14.PNG" width="350" height="350"> <br>ROC curve </p>
 
 ## Project structure
 

@@ -28,8 +28,8 @@ A bank initiated an one-year marketing campaign among its clients to deposit mon
 It might be suggested to contact customers either in December or in summer, because the probability of success depends on month:
 
 <div align="center">
-<img src="./figures/fig_6.png" width="425" height="325"/> 
-<img src="./figures/fig_7.png" width="425" height="325">  </div>
+<img src="./figures/fig_6.png" width="400" height="300"/> 
+<img src="./figures/fig_7.png" width="400" height="300">  </div>
 
 
 &emsp; &emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;**Success probability by months** &emsp; &emsp;&emsp;&emsp;&emsp; &emsp; &emsp;&emsp;&emsp;&emsp; **Deposit outcome by age groups**

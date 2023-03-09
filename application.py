@@ -17,7 +17,7 @@ for file in os.listdir("../models/"):
         best_model = os.path.join("../models/", file)
         
 # loading saved model
-with open(best_model), 'rb') as f:
+with open(best_model, 'rb') as f:
     model = pickle.load(f)
     
 # Loading current date    

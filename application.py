@@ -11,10 +11,10 @@ from utils.reader_config import config_reader
 # Import of parameters
 config = config_reader('config/config.json')
 
-for file in os.listdir("../models/"):
+for file in os.listdir("./models/"):
     if file.endswith(".pkl"):
         #print(os.path.join("../models/", file))
-        best_model = os.path.join("../models/", file)
+        best_model = os.path.join("./models/", file)
         
 # loading saved model
 with open(best_model, 'rb') as f:

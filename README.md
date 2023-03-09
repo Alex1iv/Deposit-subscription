@@ -11,7 +11,7 @@
 ---
 
 ## Summary
-It was predicted the outcome of the marketing campaign using the the gradient boosting model. It was identified 15 most significant featurs, affecting the campaign outcome - open the deposit. The customer may get a forecast of contact while marketing campaign by a given data using the [application on a web server](https://alex1iv-marketing-campaign-application-n8fexu.streamlit.app/). The sample page shown below.
+It was predicted results of the direct marketing campaign: whether a client will subscribe for a term depsit. It was identified  most significant factors of positive campaign outcome. The customer may get a forecast of contact while marketing campaign by a given data using the [application on a web server](https://alex1iv-marketing-campaign-application-n8fexu.streamlit.app/). The sample page shown below.
 
 
 <div align="center">
@@ -32,17 +32,22 @@ It might be suggested to contact customers either in December or in summer, beca
 <img src="./figures/fig_7.png" width="400" height="300">  </div>
 
 
-&emsp; &emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;**Success probability by months** &emsp; &emsp;&emsp;&emsp;&emsp; &emsp; &emsp;&emsp;&emsp;&emsp; **Deposit outcome by age groups**
+&emsp; &emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;**Probability of subscription by months** &emsp; &emsp;&emsp;&emsp;&emsp; &emsp; &emsp;&emsp;&emsp;&emsp; **Deposit outcome by age groups**
 
 
 It was studied several models such as linear regression, random forest, decision tree, gradient boosting and stacking
-Most significant featurs are: 'poutcome_success', 'balance', 'pdays', and 13 others.
 
 The model shows good predictive capability.
 
 <p align="center"> 
-<img src="./figures/fig_14.png" width="400" height="400"> </p>
+<img src="./figures/fig_15.png" width="400"> </p>
 <p align="center"> ROC curve </p>
+
+Most significant featurs are: poutcome_success, balance, age, pdays, contact by cellular phone, and others. It implies that elder people as well as young have propensity to subscribe for term depostit after summer. Most people in these groups have secondary education and married. Meanwhile single people with tertiary education have higher rate to subscribe than that of other social group.   
+
+<p align="center"> 
+<img src="./figures/fig_14.png" width="400" > </p>
+
 
 ## Project structure
 

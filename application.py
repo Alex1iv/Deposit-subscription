@@ -185,7 +185,7 @@ test_df = test_df[['balance', 'housing', 'loan', 'campaign', 'pdays', 'previous'
 
 
 # Prediction of probabilities:
-predict_prob = model.predict_proba(test_df)
+predict_prob = model.predict_proba(test_df)[:,1]
 predict_class = model.predict(test_df)
 
 #st.subheader('Suggestion:')

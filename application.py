@@ -168,7 +168,7 @@ temp = pd.DataFrame(transformed_data, columns = columns_to_process, index=[test_
 test_df.drop(columns_to_process, axis=1, inplace=True)
 test_df = test_df.merge(temp, left_index=True, right_index=True)
 
-test_df.drop(['job', 'marital', 'education', 'default', 'housing', 'loan', 'day', 'month', 'campaign', 'previous'], axis=1, inplace=True)
+# test_df.drop(['job', 'marital', 'education', 'default', 'housing', 'loan', 'day', 'month', 'campaign', 'previous'], axis=1, inplace=True)
 test_df.columns
 
 for i in ['success', 'unknown']:
@@ -176,7 +176,6 @@ for i in ['success', 'unknown']:
 
 for i in ['cellular', 'unknown']:
     test_df[f'contact_{i}'] = test_df['contact'].apply(lambda x: 1 if x==i else 0)
-
 
 test_df.drop(['poutcome', 'contact_cellular'], axis=1, inplace=True)
 

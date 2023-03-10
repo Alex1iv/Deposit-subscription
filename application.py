@@ -11,12 +11,11 @@ sys.path.insert(1, "./config/")
 from utils.reader_config import config_reader
 # Import of parameters
 config = config_reader('config/config.json')
-path_models = '../models/'
+path_models = './models/'
 
-
-for file in os.listdir("../models/"):
+for file in os.listdir(path_models):
     if file.endswith("reduced.pkl"):
-        path_reduced_model = os.path.join("../models/", file)
+        path_reduced_model = os.path.join(path_models, file)
         
 # loading saved model
 with open(path_reduced_model, 'rb') as f:

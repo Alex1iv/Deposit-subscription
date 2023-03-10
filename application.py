@@ -153,7 +153,7 @@ else:
     test_df = pd.DataFrame(data, index=[0]) 
 
 st.write(test_df)
-print(test_df)
+#print(test_df)
 
 # preprocessing---------------------------
 
@@ -169,7 +169,7 @@ test_df.drop(columns_to_process, axis=1, inplace=True)
 test_df = test_df.merge(temp, left_index=True, right_index=True)
 
 # test_df.drop(['job', 'marital', 'education', 'default', 'housing', 'loan', 'day', 'month', 'campaign', 'previous'], axis=1, inplace=True)
-test_df.columns
+#test_df.columns
 
 for i in ['success', 'unknown']:
     test_df[f'poutcome_success'] = test_df['poutcome'].apply(lambda x: 1 if x==i else 0)

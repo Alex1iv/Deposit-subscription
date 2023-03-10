@@ -180,6 +180,7 @@ for i in ['cellular', 'unknown']:
 
 test_df.drop(['poutcome', 'contact_cellular'], axis=1, inplace=True)
 
+# Drop columns except those in list
 for i in test_df.columns:
     col_list = ['poutcome_success', 'balance', 'contact_unknown', 'age','pdays']
     if i not in col_list:
@@ -188,13 +189,6 @@ for i in test_df.columns:
 test_df = test_df[['poutcome_success', 'balance', 'contact_unknown', 'age','pdays']]
 
 y_pred, y_prob= model.predict(test_df), model.predict_proba(test_df)[:,1]
-
-
-
-
-
-# df_encoded.drop(['job', 'marital','default', 'day', 'contact', 'month','poutcome'], axis=1, inplace=True) #'age_group','education', 'loan','deposit'
-
 
 
 

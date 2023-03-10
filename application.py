@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
  
 import pickle
+from joblib import load
 import os, sys
 from datetime import date
 from sklearn.preprocessing  import StandardScaler 
@@ -10,15 +11,17 @@ sys.path.insert(1, "./config/")
 from utils.reader_config import config_reader
 # Import of parameters
 config = config_reader('config/config.json')
+path_models = '../models/'
 
-for file in os.listdir("./models/"):
-    if file.endswith(".pkl"):
-        #print(os.path.join("../models/", file))
-        best_model = os.path.join("./models/", file)
+
+for file in os.listdir("../models/"):
+    if file.endswith("reduced.pkl"):
+        path_reduced_model = os.path.join("../models/", file)
         
 # loading saved model
-with open(best_model, 'rb') as f:
+with open(path_reduced_model, 'rb') as f:
     model = pickle.load(f)
+
     
 # Loading current date    
 today = date.today().isoformat().split('-')
@@ -107,9 +110,9 @@ data_yes = {'age': {2541: 42},
     'month': {2541: 'aug'},
     'campaign': {2541: 1},
     'pdays': {2541: 459},
-    'previous': {2541: 1}, #success
+    'previous': {2541: 1}, 
     'poutcome': {2541: 'unknown'},
- }
+}
 
 data_no = {'age': {1865: 47},
     'job': {1865: 'retired'},
@@ -156,39 +159,64 @@ print(test_df)
 
 # preprocessing---------------------------
 
-scaler = StandardScaler()
+from joblib import load
+scaler = load(os.path.join(path_models, 'scaler_ss.joblib'))
 columns_to_process = ['age', 'balance']
-temp = scaler.fit_transform(test_df[columns_to_process])
-temp = pd.DataFrame(temp, columns = columns_to_process) 
+transformed_data = scaler.fit_transform(test_df[columns_to_process])
+
+columns_to_process = ['age', 'balance']
+temp = pd.DataFrame(transformed_data, columns = columns_to_process, index=[test_df.index[0]]) 
+
 test_df.drop(columns_to_process, axis=1, inplace=True)
 test_df = test_df.merge(temp, left_index=True, right_index=True)
 
-for j in ['balance',  'pdays', 'previous', 'campaign']: #'duration',
-    test_df[j] = (test_df[j]-(limits[j].min()))/(limits[j].max()-(limits[j].min()))
-
-for i in ['mar', 'may', 'oct', 'sep']:
-    test_df[f'month_{i}'] = test_df['month'].apply(lambda x: 1 if x==i else 0)
-
-test_df['contact_cellular'] = test_df['contact'].apply(lambda x: 1 if x=='cellular' else 0)
-
-test_df['contact_unknown'] = test_df['contact'].apply(lambda x: 1 if x=='unknown' else 0) 
+test_df.drop(['job', 'marital', 'education', 'default', 'housing', 'loan', 'day', 'month', 'campaign', 'previous'], axis=1, inplace=True)
+test_df.columns
 
 for i in ['success', 'unknown']:
-    test_df[f'poutcome_{i}'] = test_df['poutcome'].apply(lambda x: 1 if x==i else 0)
+    test_df[f'poutcome_success'] = test_df['poutcome'].apply(lambda x: 1 if x==i else 0)
 
-for i in ['housing', 'loan']:
-    test_df[i] = test_df[i].apply(lambda x: 1 if x=='yes' else 0)
-#test_df['housing'] = test_df['housing'].apply(lambda x: 1 if x=='yes' else 0)
+for i in ['cellular', 'unknown']:
+    test_df[f'contact_{i}'] = test_df['contact'].apply(lambda x: 1 if x==i else 0)
 
-#test_df['age_group_60+'] = test_df['age'].apply(lambda x: 1 if 60<=x<=95 else 0)
-#test_df = test_df.drop(labels=['age']) # for series
+test_df.drop(['poutcome', 'contact_cellular'], axis=1, inplace=True)
+test_df = test_df[['poutcome_success', 'balance', 'contact_unknown', 'age','pdays']]
 
-test_df['age_group'] = pd.cut(test_df['age'], [0,30,40,50,60,9999], labels = ['<30','30-40','40-50','50-60','60+'])
+y_pred, y_prob= model.predict(test_df), model.predict_proba(test_df)[:,1]
 
-test_df.drop(['job', 'marital','default', 'day', 'contact', 'month','poutcome'], axis=1, inplace=True) #'age_group','education', 'loan','deposit'
 
-# Set columns order 
-test_df = test_df[['default', 'housing', 'loan', 'campaign', 'pdays', 'previous','job_admin.', 'job_blue-collar', 'job_entrepreneur', 'job_housemaid','job_management', 'job_retired', 'job_self-employed', 'job_services','job_student', 'job_technician', 'job_unemployed', 'marital_divorced','marital_married', 'marital_single', 'education_primary','education_secondary', 'education_tertiary', 'contact_cellular','contact_telephone', 'contact_unknown', 'month_apr', 'month_aug','month_dec', 'month_feb', 'month_jan', 'month_jul', 'month_jun','month_mar', 'month_may', 'month_nov', 'month_oct', 'month_sep','poutcome_failure', 'poutcome_other', 'poutcome_success','poutcome_unknown', 'age_group_<30', 'age_group_30-40','age_group_40-50', 'age_group_50-60', 'age_group_60+', 'day_of_week_Mon', 'day_of_week_Tue', 'day_of_week_wed', 'day_of_week_Thu', 'day_of_week_Fri', 'day_of_week_Sat','day_of_week_Sun', 'age', 'balance']]
+# for j in ['balance',  'pdays', 'previous', 'campaign']: #'duration',
+#     test_df[j] = (test_df[j]-(limits[j].min()))/(limits[j].max()-(limits[j].min()))
+
+# """
+# for i in ['mar', 'may', 'oct', 'sep']:
+#     test_df[f'month_{i}'] = test_df['month'].apply(lambda x: 1 if x==i else 0)
+
+# test_df['contact_cellular'] = test_df['contact'].apply(lambda x: 1 if x=='cellular' else 0)
+
+# test_df['contact_unknown'] = test_df['contact'].apply(lambda x: 1 if x=='unknown' else 0) 
+
+# for i in ['success', 'unknown']:
+#     test_df[f'poutcome_{i}'] = test_df['poutcome'].apply(lambda x: 1 if x==i else 0)
+
+# for i in ['housing', 'loan']:
+#     test_df[i] = test_df[i].apply(lambda x: 1 if x=='yes' else 0)
+# """ 
+
+# #test_df['housing'] = test_df['housing'].apply(lambda x: 1 if x=='yes' else 0)
+
+# #test_df['age_group_60+'] = test_df['age'].apply(lambda x: 1 if 60<=x<=95 else 0)
+# #test_df = test_df.drop(labels=['age']) # for series
+
+# test_df['age_group'] = pd.cut(test_df['age'], [0,30,40,50,60,9999], labels = ['<30','30-40','40-50','50-60','60+'])
+
+# df_encoded = pd.get_dummies(test_df)
+
+
+# df_encoded.drop(['job', 'marital','default', 'day', 'contact', 'month','poutcome'], axis=1, inplace=True) #'age_group','education', 'loan','deposit'
+
+# # Set columns order 
+# test_df = test_df[['default', 'housing', 'loan', 'campaign', 'pdays', 'previous','job_admin.', 'job_blue-collar', 'job_entrepreneur', 'job_housemaid','job_management', 'job_retired', 'job_self-employed', 'job_services','job_student', 'job_technician', 'job_unemployed', 'marital_divorced','marital_married', 'marital_single', 'education_primary','education_secondary', 'education_tertiary', 'contact_cellular','contact_telephone', 'contact_unknown', 'month_apr', 'month_aug','month_dec', 'month_feb', 'month_jan', 'month_jul', 'month_jun','month_mar', 'month_may', 'month_nov', 'month_oct', 'month_sep','poutcome_failure', 'poutcome_other', 'poutcome_success','poutcome_unknown', 'age_group_<30', 'age_group_30-40','age_group_40-50', 'age_group_50-60', 'age_group_60+', 'day_of_week_Mon', 'day_of_week_Tue', 'day_of_week_wed', 'day_of_week_Thu', 'day_of_week_Fri', 'day_of_week_Sat','day_of_week_Sun', 'age', 'balance']]
 
 
 # Prediction of probabilities:

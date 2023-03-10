@@ -4,7 +4,7 @@ import streamlit as st
 import pickle
 import os, sys
 from datetime import date
-
+from sklearn.preprocessing  import StandardScaler 
 sys.path.insert(1, "./config/")
 
 from utils.reader_config import config_reader
@@ -83,7 +83,6 @@ data = {
     'default': Default,
     'balance': Balance,
     'housing': Housing,
-    #'duration':224, # убрать
     'Loan': 'no',
     'contact':Contact,
     'month': month,
@@ -95,40 +94,38 @@ data = {
 }
 
 
-data_yes = {'age': {1: 55},
-    'job': {1: '	services'},
-    'marital': {1: 'married'},
-    'education': {1: 'secondary'},
-    'default': {1: 'no'},
-    'balance': {1: 2476.0},
-    'housing': {1: 'yes'},
-    'loan': {1: 'no'},
-    'contact': {1: 'unknown'},
-    'day': {1: 5},
-    'month': {1: 'may'},
-    #'duration': {1: 1201},
-    'campaign': {1: 1},
-    'pdays': {1: -1},
-    'previous': {1: 0},
-    'poutcome': {1: 'unknown'},
+data_yes = {'age': {2541: 42},
+    'job': {2541: 'admin.'},
+    'marital': {2541: 'married'},
+    'education': {2541: 'primary'},
+    'default': {2541: 'no'},
+    'balance': {2541: -306.0},
+    'housing': {2541: 'yes'},
+    'loan': {2541: 'no'},
+    'contact': {2541: 'cellular'},
+    'day': {2541: 17},
+    'month': {2541: 'aug'},
+    'campaign': {2541: 1},
+    'pdays': {2541: 459},
+    'previous': {2541: 1}, #success
+    'poutcome': {2541: 'unknown'},
  }
 
-data_no = {'age': {6001: 26},
-    'job': {6001: 'technician'},
-    'marital': {6001: 'married'},
-    'education': {6001: 'tertiary'},
-    'default': {6001: 'no'},
-    'balance': {6001: 8.0},
-    'housing': {6001: 'yes'},
-    'loan': {6001: 'yes'},
-    'contact': {6001: 'unknown'},
-    'day': {6001: 13},
-    'month': {6001: 'may'},
-    #'duration': {6001: 262},
-    'campaign': {6001: 2},
-    'pdays': {6001: -1},
-    'previous': {6001: 0},
-    'poutcome': {6001: 'unknown'},
+data_no = {'age': {1865: 47},
+    'job': {1865: 'retired'},
+    'marital': {1865: 'married'},
+    'education': {1865: 'primary'},
+    'default': {1865: 'no'},
+    'balance': {1865: 1374},
+    'housing': {1865: 'no'},
+    'loan': {1865: 'yes'},
+    'contact': {1865: 'telephone'},
+    'day': {1865: 8},
+    'month': {1865: 'may'},
+    'campaign': {1865: 479},
+    'pdays': {1865: 359},
+    'previous': {1865: 3},
+    'poutcome': {1865: 'failure'},
 }
 
 #test_df = pd.DataFrame(data) #.items()
@@ -158,6 +155,14 @@ st.write(test_df)
 print(test_df)
 
 # preprocessing---------------------------
+
+scaler = StandardScaler()
+columns_to_process = ['age', 'balance']
+temp = scaler.fit_transform(test_df[columns_to_process])
+temp = pd.DataFrame(temp, columns = columns_to_process) 
+test_df.drop(columns_to_process, axis=1, inplace=True)
+test_df = test_df.merge(temp, left_index=True, right_index=True)
+
 for j in ['balance',  'pdays', 'previous', 'campaign']: #'duration',
     test_df[j] = (test_df[j]-(limits[j].min()))/(limits[j].max()-(limits[j].min()))
 
@@ -175,13 +180,15 @@ for i in ['housing', 'loan']:
     test_df[i] = test_df[i].apply(lambda x: 1 if x=='yes' else 0)
 #test_df['housing'] = test_df['housing'].apply(lambda x: 1 if x=='yes' else 0)
 
-test_df['age_group_60+'] = test_df['age'].apply(lambda x: 1 if 60<=x<=95 else 0)
+#test_df['age_group_60+'] = test_df['age'].apply(lambda x: 1 if 60<=x<=95 else 0)
 #test_df = test_df.drop(labels=['age']) # for series
 
-test_df.drop(['age', 'job', 'marital','default', 'day', 'contact', 'month','poutcome'], axis=1, inplace=True) #'age_group','education', 'loan','deposit'
+test_df['age_group'] = pd.cut(test_df['age'], [0,30,40,50,60,9999], labels = ['<30','30-40','40-50','50-60','60+'])
+
+test_df.drop(['job', 'marital','default', 'day', 'contact', 'month','poutcome'], axis=1, inplace=True) #'age_group','education', 'loan','deposit'
 
 # Set columns order 
-test_df = test_df[['balance', 'housing', 'loan', 'campaign', 'pdays', 'previous', 'contact_cellular', 'contact_unknown', 'month_mar', 'month_may', 'month_oct', 'month_sep', 'poutcome_success', 'poutcome_unknown', 'age_group_60+']] #'duration', 
+test_df = test_df[['default', 'housing', 'loan', 'campaign', 'pdays', 'previous','job_admin.', 'job_blue-collar', 'job_entrepreneur', 'job_housemaid','job_management', 'job_retired', 'job_self-employed', 'job_services','job_student', 'job_technician', 'job_unemployed', 'marital_divorced','marital_married', 'marital_single', 'education_primary','education_secondary', 'education_tertiary', 'contact_cellular','contact_telephone', 'contact_unknown', 'month_apr', 'month_aug','month_dec', 'month_feb', 'month_jan', 'month_jul', 'month_jun','month_mar', 'month_may', 'month_nov', 'month_oct', 'month_sep','poutcome_failure', 'poutcome_other', 'poutcome_success','poutcome_unknown', 'age_group_<30', 'age_group_30-40','age_group_40-50', 'age_group_50-60', 'age_group_60+', 'day_of_week_Mon', 'day_of_week_Tue', 'day_of_week_wed', 'day_of_week_Thu', 'day_of_week_Fri', 'day_of_week_Sat','day_of_week_Sun', 'age', 'balance']]
 
 
 # Prediction of probabilities:

@@ -1,4 +1,4 @@
-# Marketing campaign
+# Deposit subscription
 
 ## Content
 
@@ -11,7 +11,7 @@
 ---
 
 ## Summary
-It was predicted results of the direct marketing campaign: whether a client will subscribe for a term depsit. It was identified  most significant factors of positive campaign outcome. The customer may get a forecast of contact while marketing campaign by a given data using the [application on a web server](https://alex1iv-marketing-campaign-application-n8fexu.streamlit.app/). The sample page shown below.
+It was studied factors, affecting subscription for a term depsit after the direct marketing campaign. It was identified  most significant factors of positive campaign outcome. The customer may get a forecast of contact while marketing campaign by a given data using the [application on a web server](https://alex1iv-marketing-campaign-application-n8fexu.streamlit.app/). The sample page shown below.
 
 
 <div align="center">
@@ -31,19 +31,15 @@ It might be suggested to contact customers either in December or in summer, beca
 <img src="./figures/fig_6.png" width="400" height="300"/> 
 <img src="./figures/fig_7.png" width="400" height="300">  </div>
 
-
-&emsp; &emsp;&emsp;&emsp;&emsp;&emsp; &emsp;&emsp;**Probability of subscription by months** &emsp; &emsp;&emsp;&emsp;&emsp; &emsp; &emsp;&emsp;&emsp;&emsp; **Deposit outcome by age groups**
-
-
 It was studied several models such as linear regression, random forest, decision tree, gradient boosting and stacking
 
-The model shows good predictive capability.
+The model shows good predictive capability: it classifies correctly 78% of entries.
 
 <p align="center"> 
 <img src="./figures/fig_15.png" width="400"> </p>
 <p align="center"> ROC curve </p>
 
-Most significant featurs are: poutcome_success, balance, age, pdays, contact by cellular phone, and others. It implies that elder people as well as young have propensity to subscribe for term depostit after summer. Most people in these groups have secondary education and married. Meanwhile single people with tertiary education have higher rate to subscribe than that of other social group.   
+Most significant featurs are: poutcome_success, balance, age, pdays, contact by cellular phone, and others. It implies that elder people as well as young have propensity to subscribe for term depostit in case the previous contact was successful. The probability of success increases in late summer. Most people in these groups have secondary education and married. Meanwhile single people with tertiary education have higher rate to subscribe than that of other social group.   
 
 <p align="center"> 
 <img src="./figures/fig_14.png" width="400" > </p>

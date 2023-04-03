@@ -11,7 +11,7 @@
 ---
 
 ## Summary
-It was studied factors, affecting subscription for a term depsit after the direct marketing campaign. It was identified  most significant factors of positive campaign outcome. The customer may get a forecast of contact while marketing campaign by a given data using the [application on a web server](https://alex1iv-marketing-campaign-application-n8fexu.streamlit.app/). The sample page shown below.
+It was found factors, affecting subscriptions for a term deposit after the direct marketing campaign. It identified the most significant factors of positive campaign outcomes. The customer may get a forecast of contact while marketing the campaign by a given data using the application [application on a web server](https://alex1iv-marketing-campaign-application-n8fexu.streamlit.app/). The sample page shown below.
 
 
 <div align="center">

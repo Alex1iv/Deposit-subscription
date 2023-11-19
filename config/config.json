@@ -3,7 +3,9 @@
     "random_seed" : 42,
 
     "//": "Model folder",
-    "model_path" : "./models/",
+    "model_path" : "../models/",
+    "data_dir" : "../data/",
+    "path_figures": "../figures/",
 
     "n_estimators" : 117,
     "criterion": "log_loss",
